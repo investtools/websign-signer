@@ -1,0 +1,3 @@
+[submodule "extra/winsdk"]
+	path = extra/winsdk
+	url = https://github.com/tpn/winsdk-10

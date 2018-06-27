@@ -1,0 +1,45 @@
+{
+  "name": "websign-signer",
+  "version": "1.0.0",
+  "description": "Native part of WebSign",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "npm run build:ext && ts-node src/test",
+    "build:commonjs": "rimraf lib && tsc --target es5 --outDir lib --module commonjs --declaration",
+    "build:es": "rimraf es && tsc --target es6 --outDir es --module es6 --moduleResolution node",
+    "build:ext": "rimraf build && node-gyp configure build && npm run -s -- ndts . > src/lib-types.d.ts",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:ext",
+    "ts": "ts-node src/",
+    "prepublishOnly": "npm run build",
+    "autogypi": "autogypi",
+    "node-gyp": "node-gyp",
+    "copyasm": "copyasm",
+    "ndts": "ndts",
+    "install": "autogypi && node-gyp configure build"
+  },
+  "author": "André Aizim Kelmanson",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.3.5",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.0",
+    "typescript": "^2.9.2"
+  },
+  "files": [
+    "es",
+    "lib",
+    "binding.gyp",
+    "auto.gypi",
+    "auto-top.gypi",
+    "autogypi.json",
+    "ext"
+  ],
+  "types": "./lib/index.d.ts",
+  "jsnext:main": "./es/index.js",
+  "module": "./es/index.js",
+  "dependencies": {
+    "autogypi": "^0.2.2",
+    "nbind": "^0.3.15",
+    "node-gyp": "^3.7.0"
+  }
+}
